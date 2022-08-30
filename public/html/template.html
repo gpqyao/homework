@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue学习使用</title>
+  <style>
+    .active{
+      color:aquamarine;
+    }
+  </style>
+  <!-- 第1步： 引入vue库文件 -->
+  <script src="./js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 第2步：挂载点 -->
+  <div id="app">
+    <ul>
+      <li v-bind:class="{active: a}" @click="clickFn" data-name="a">1</li>
+      <li v-bind:class="{active: b}" @click="clickFn" data-name="b">2</li>
+      <li v-bind:class="{active: c}" @click="clickFn" data-name="c">3</li>
+    </ul>
+    <ul>
+      <li v-if="a">11</li>
+      <li v-if="b">22</li>
+      <li v-if="c">33</li>
+    </ul>
+  </div>
+
+  <!-- 第3步：实例化vue -->
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        a:true,
+        b:false,
+        c:false
+      },
+      methods:{
+        clickFn(evt){
+          this.a=false
+          this.b=false
+          this.c=false
+          this[evt.target.dataset.name] = true
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

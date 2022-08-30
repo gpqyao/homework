@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        color: lightcoral;
+        transition: all 2s;
+      }
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-bind:class="{active:a}" @click="clickFn" data-name="a">1</li>
+        <li v-bind:class="{active:b}" @click="clickFn" data-name="b">2</li>
+        <li v-bind:class="{active:c}" @click="clickFn" data-name="c">3</li>
+      </ul>
+      <ul>
+        <li v-if="a">11</li>
+        <li v-if="b">21</li>
+        <li v-if="c">31</li>
+      </ul>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          a: true,
+          b: false,
+          c: false,
+        },
+        methods: {
+            clickFn(evt){
+                this.a=false
+                this.b=false
+                this.c=false
+                this[evt.target.dataset.name]= true
+            }
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <!-- 使用样式来完成 -->
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 表达式 不会对于标签进行解决输出，他会转移后输出，为了安全 -->
+        <!-- <div>{{ title }}</div> -->
+
+        <!-- 解析html中地html标签，进行解析输出，一般用于后台添加地富文本内容在前台显示 -->
+        <!-- <div v-html="title"></div> -->
+
+        <!-- 转义输出，为了解决早期没有使用工程化时，直接script引入vue，进行使用时有花括号闪现问题 -->
+        <!-- 一般用不到，在单文件vue中，不会出现这种问题 -->
+        <!-- <div v-text="'title"></div> -->
+
+        <!-- vue中提供一个专门用于解决闪现问题地指令 v-cloak -->
+        <!-- v-html或者v-text他们能够解决闪现问题，但是有的时候，一些项目前期没有用它，这时候如果全部去修改，工程量有点大，可以用此指令 -->
+        <!-- <div v-cloak></div> -->
+
+        <!-- ul中的数据，是一个笃定的，没有通过vue中的数据来渲染
+            无需把他们转为虚拟dom，直接存储html，再显示直接输出
+        -->
+        <ul v-pre>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <hr>
+        <!-- 对于数据，只绑定一次，性能优化 -->
+        <div v-once>{{ title }}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                title:`<h3>我是一个标题</h3>`
+                // title:`<script>document.write('111')<\/script>`
+                    // 图文内容地显示 可以在这里
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <h3 id="title"></h3>
+        <input type="text" id="username">
+      
+        <script>
+          // 数据源
+          const data = {
+            name: '张三'
+          }
+          // 目标数据
+          const target = {}
+          // 响应数据
+          Object.defineProperty(target, 'name', {
+            // 获取  target.name
+            get() {
+              // return Reflect.get(data, 'name')
+              return data.name
+            },
+            set(newValue) {
+              data.name = newValue
+              document.getElementById('title').textContent = newValue
+            }
+          })
+      
+      
+          // 获取dom中的元素
+          const username = document.getElementById('username')
+          username.value = target.name
+          const title = document.getElementById('title')
+          title.textContent = target.name
+      
+          username.addEventListener('input', function () {
+            target.name = this.value
+          })
+      
+      
+        </script>
+</body>
+</html>

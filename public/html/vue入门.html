@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入 -->
+    <script src="../01_basic/js/vue.js"></script>
+</head>
+<body>
+    <!-- 根容器，js镀锡转为真是得html后，放在网页中得什么位置，即挂载点 -->
+    <!-- 挂载点可以为多个，但是在工作中一般只有一个 -->
+    <div id="app">
+        <!-- 第四步  使用 -->
+        <!-- 模板语法 插值表达式 mustcache模板名称[小胡子语法] -->
+        <h3>{{ title }}</h3>
+        <!-- <input type="text" name="" id="setTitle"> -->
+        <input type="text" v-model="title">
+        <!-- v-model 语法糖 -->
+    </div>
+    <!-- 第三步 实例化vue -->
+    <script>
+        const vm = new Vue({
+            // vue处理完成数据展示在页面中得挂载点dom
+            el:"#app",
+            // Vue2中，唯一一个可以那data写成对象得地方就是在实例化vue类时
+            // 声明vue要渲染得数据
+            data:{
+                title:'娇娇'
+            }
+        })
+        // document.getElementById('setTitle').value = vm.$data.title
+        // document.getElementById('setTitle').oninput = e => vm.$data.title = e.target.value.trim()
+    </script>
+</body>
+</html>

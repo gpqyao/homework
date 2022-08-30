@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue学习使用</title>
+  <!-- 第1步： 引入vue库文件 -->
+  <script src="./js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 第2步：挂载点 -->
+  <div id="app">
+    <!-- vue模板的表达式为 {{ 变量 }} -->
+    <!-- 表达式中不能定义变量或函数，也不可以写if条件或循环 -->
+    <!-- 绑定变量 -->
+    <div>{{ title }}</div>
+    <!-- 进行计算 vue模板中不太建议在里面写运算 -->
+    <div>{{ 1+1 }}</div>
+    <!-- 调用函数或方法 -->
+    <div>{{sum()}}</div>
+    <!-- 调用js内置方法  不太推荐 -->
+    <div>{{ '电饭锅是'.substr(0,3) }}</div>
+    <!-- 三目运算 -->
+    <div>{{ age<20?'未成年':'成年' }}</div>
+
+    </div>
+
+    <!-- 第3步：实例化vue -->
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          age: 18,
+          title: 'hello vue',
+          // 函数可以写在data中的，但是不太建议
+          // data中的数据都会被劫持，但是函数是没有必须劫持的
+          // vue为了提升性能，新增一个配置选项，用于定义函数方法method，它不会被劫持
+          // sum
+        },
+        methods: {
+          sum() {
+            return 1 + 2
+          }
+        }
+      })
+
+    // function sum() {
+    //   return 1 + 2
+    // }
+    </script>
+
+</body>
+
+</html>
