@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <!-- <style>
+        .active{
+            color:lawngreen;
+        }
+        .font{
+            font-size: 30px;
+        }
+    </style> -->
+</head>
+<body>
+    <div id="app">
+        <!-- <div :class="titleStyle">这是一个标题</div> -->
+        <!-- <button @click="addStyle">添加样式</button> -->
+        <!-- 对象 -->
+        <div :style="{color:'blue',fontSize:'30px'}">标题一</div>
+        <!-- 数组 -->
+        <div :style="[{color:'red',fontSize:'30px'}]">标题一</div>
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                // titlrClass:{active:false},
+                // titleStyle:[]
+            },
+            methods:{
+                // addClass(){
+
+                // },
+                // addStyle(){
+                //     this.titleStyle.push('active')
+                //     this.titleStyle.push('font')
+                // }
+            }
+        })
+    </script>
+</body>
+</html>

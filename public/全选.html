@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="checked" @change="onSelected">
+        <ul>
+            <li>
+                <input type="checkbox" v-model="lessons" @change="selectlesson" value="aa">aa
+            </li>
+            <li>
+                <input type="checkbox" v-model="lessons" @change="selectlesson" value="bb">bb
+            </li>
+            <li>
+                <input type="checkbox" v-model="lessons" @change="selectlesson" value="cc">cc
+            </li>
+        </ul>
+        <hr>
+        <div>{{lessons}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                // checked: false
+                lessons:[],
+                checked:false
+            },
+            methods:{
+                // clickFn(evt){
+                //     console.log(evt.target.checked);
+                // }
+                onSelected(evt){
+                    if(evt.target.checked){
+                        this.lessons = ["aa","bb","cc"]
+                    }else{
+                        this.lessons =[]
+                    }
+                },
+                selectlesson(){
+                    // 只要操作数据源就可以改变试图
+                    this.checked = this.lessons.length == 3
+                }
+            }
+        })
+    </script>
+</body>
+</html>

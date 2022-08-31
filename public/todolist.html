@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" @keyup="onEnter" v-model="title"  placeholder="输入内容">
+        <hr>
+        <ul>
+            <li v-if="todos.length===0">无任务</li>
+            <li v-else v-for="item,index in todos" :key="item.id">
+                <span>{{item.title}}</span>
+                <span @click="del(index)">删除</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                todos: [],
+                title: ''
+            },
+            methods:{
+                // onEnter(evt){
+                //     if(evt.keyCode === 13){
+                //         this.todos.push({
+                //             id:Date.now(),
+                //             title: evt.target.value.trim()
+                //         })
+                //         evt.target.value = ''
+                //     }
+                // },
+                onEnter() {
+                    this.todos.push({
+                        id: Date.now(),
+                        title:this.title
+                    })
+                    this.title= ''
+                },
+                del(index){
+                    // 删除 使用vue中提供的变异方法splice来完成，用此方法可以触发视图更新
+                    this.todos.splice(index,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

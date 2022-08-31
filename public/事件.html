@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <img :src="src" alt=""> -->
+        <!-- <img v-bind:src="src" alt=""> -->
+        <!-- <div v-for="item,key,index in user" :key="key">{{index}}--{{key}}--{{item}}</div> -->
+
+        <!-- <h3>{{ num }}</h3> -->
+        <!-- <button @click="clickFn">点击</button> -->
+        <button uame="李四" data-uname="娇娇" @click="clickFn($event)">点击事件</button>
+        <input type="text" @keyup="onEnter">
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                // src:"http://www.mobiletrain.org/images_index/right-fixed-face.png"
+                // user:{id:1,name:'娇娇'},
+                num:100
+            },
+            methods:{
+                // clickFn(){
+                //     setTimeout(() =>{
+                //         this.num++
+                //         console.log('点击事件');
+                //     },1000)
+                // }
+                clickFn(evt){
+                    this.num++
+                    console.log(evt.target.getAttribute('uame'));
+                    console.log(evt.target.dataset.uname)
+                },
+                onEnter(evt){
+                    if(evt.keyCode === 13){
+                        console.log(evt.target.value);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

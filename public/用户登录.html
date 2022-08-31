@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model="username"> -->
+        <div>
+            <label>
+              账号：
+              <input type="text" v-model="username">
+            </label>
+          </div>
+          <div>
+            <label>
+              密码：
+              <input type="text" v-model="password">
+            </label>
+          </div>
+          <div>
+            <textarea v-model="intro"></textarea>
+          </div>
+          <div>
+            <button @click="dologin">登录系统</button>
+          </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                username:'',
+                password:'',
+                intro:'aaa'
+            },
+            methods:{
+                // setUsername(evt){
+                //     this.username = evt.target.value.trim()
+                // }
+                dologin(){
+                    console.log(this.username,this.password,this.intro);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
