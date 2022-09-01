@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model="username">
+            <span>{{errorUsername}}</span>
+            <hr>
+            <input type="number" v-model.number="user.id">
+        </div>
+    </div>
+    <script>
+        const vm =new Vue({
+            el:"#app",
+            data:{
+                username:'aaa',
+                errorUsername:'',
+                user:{id:100,name:'aaa'}
+                // 监听器，用来监听data配置中的数据的变化，一旦有变化，就会自动触发，默认情况
+                // 初始化不触发
+                // 在监听器中是可以得到this对象的
+                // 监听器它的依赖项只有一个，一对一
+                // 监听器中可以写异步
+            },
+            watch:{
+                // 方法或者属性名 ，就是要观察的data中的属性名称
+                // 监听对象中的指定的属性数据的变化，如果监听的是一个对象中数据变化，建议这样
+                // 监听对象，只能使用标准方式来写
+                // 监听对象变化，它的前后值是一样的，无法区分
+                user:{
+                    deep:true,
+                    handler(newValue,oldValue){
+                        console.log(newValue,oldValue);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

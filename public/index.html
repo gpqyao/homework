@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+    <link rel="stylesheet" href="../css/product.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="list">
+        <div class="products" v-for="item,index of products" :keys="item.id">
+          <img :src="item.imgSrc" alt="" />
+          <div class="name">商品名：{{item.name}}</div>
+          <div class="price">价格：￥{{item.price}}</div>
+          <div class="shopping" @click="clickFn($event)"><b>+</b> 加入购物车</div>
+        </div>
+      </div>
+      <table width="900">
+        <tr>
+          <th>id</th>
+          <th>图片</th>
+          <th>名称</th>
+          <th>单价</th>
+          <th>数量</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="item,index in carts" :keys="item.id">
+          <td>{{item.id}}</td>
+          <td><img :src="item.imgSrc" alt="" /></td>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td>
+            <!-- <button @click="setNum(1,item)">+++</button> -->
+            <button @click="setNum(1,item.id)"><b>+</b></button>
+            <input type="number" v-model="item.num" />
+            <!-- <button @click="setNum(-1,item)">---</button> -->
+            <button @click="setNum(-1,item.id)"><b>-</b></button>
+          </td>
+          <td>
+            <button @click="del(item.id)">删除</button>
+          </td>
+        </tr>
+      </table>
+      <hr />
+      <h3>合计： {{totalPrice}}</h3>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          products:[],
+          carts: [],
+        },
+        computed: {
+          totalPrice() {
+            return this.carts.reduce((prev, { price, num }) => {
+              prev += (price - 0)  * num;
+              return prev;
+            }, 0);
+          }
+        },
+        watch: {
+          carts: {
+            handler() {
+              axios.post('http://localhost:3000/cart/change', this.carts)
+            }
+          },
+          deep: true
+        },
+        methods: {
+          clickFn(event) {
+            const data = this.products[Number(event.target.parentElement.getAttribute('keys'))-1]
+            const item = this.carts.find((item) => item.id === Number(event.target.parentElement.getAttribute('keys')))
+            if (item) {
+              this.setNum(1, data.id)
+            } else {
+              data.num = 1
+              this.carts.push(data)
+            }
+          },
+          setNum(n, id) {
+            const item = this.carts.find((item) => item.id === id)
+            this.$forceUpdate()
+            item.num += n;
+            item.num = Math.min(
+              10,
+              Math.max(1, item.num)
+            );
+          },
+          del(id) {
+            if (confirm("确定删除咩？")) {
+              const index = this.carts.findIndex((item) => item.id === id)
+              this.carts.splice(index, 1);
+            }
+          }
+        },
+        mounted() {
+          axios.get('http://localhost:3000/products.json').then(res => {
+            this.products = res.data
+          })
+          axios.get('http://localhost:3000/shoppingList.json').then(res => {
+            this.carts = res.data
+          })
+        }
+      })
+    </script>
+  </body>
+</html>

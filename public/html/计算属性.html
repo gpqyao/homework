@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{ n1+n2 }}</h3>
+        <h3>{{sun()}}</h3>
+        <hr>
+        <div>{{total}}</div>
+        <h3>{{msg}}</h3>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                n1:1,
+                n2:2,
+                msg:''
+            },
+            computed:{
+                total:{
+                    get(){
+                        return this.n1 + this.n2
+                    },
+                    set(newVal){
+                        if(newVal > 10){
+                            this.msg='值比较大'
+                        }
+                    }
+                }
+            },
+            methods:{
+                sum(){
+                    if(this.total > 6){
+                        this.total = 101
+                    }
+                    return this.n1 + this.n2
+                }
+            }
+        })
+    </script>
+</body>
+</html>

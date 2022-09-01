@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue学习使用</title>
+    <!-- 第1步： 引入vue库文件 -->
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <!-- 第2步：挂载点 -->
+    <div id="app">
+      <h3 v-red>{{title}}</h3>
+    </div>
+
+    <!-- 第3步：实例化vue -->
+    <script>
+      const Plugin = {
+        install(Vue, options) {
+          console.log(options);
+          Vue.directive("red", (el) => {
+            el.style.cssText = "color:red";
+          });
+          Vue.mixin({
+            data() {
+              return {
+                title: `() => console.log('run');`,
+              };
+            },
+            created() {
+              this.title = options.title;
+              console.log("混入了");
+            },
+          });
+          Vue.prototype.run = () => console.log("run");
+        },
+      };
+
+      Vue.use(Plugin, { title: "abc" });
+
+      const vm = new Vue({
+        el: "#app",
+        data: {},
+        created() {
+          this.run();
+          // Vue.run()
+        },
+      });
+    </script>
+  </body>
+</html>
